@@ -38,7 +38,7 @@ function mulai() {
   selesai = false;
   skor = 0;
   koplo.play();
-  alert("Bunuh semua Oni yang muncul dari asap biru");
+  alert("Bunuh semua Oni yang muncul dari asap biru dalam 10 detik");
   scoreBoard.textContent = `Skor anda ${skor}`;
   ruiPop();
   setTimeout(() => {
