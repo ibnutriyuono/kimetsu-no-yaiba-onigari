@@ -135,11 +135,10 @@ button {
 
 .rui-container {
   width: 200px;
-  height: 200px;
+  height: 150px;
   position: relative;
   overflow: hidden;
   float: left;
-  margin-top: -60px;
 }
 
 .rui-container::after {
