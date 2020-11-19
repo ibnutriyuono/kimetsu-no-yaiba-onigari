@@ -3,8 +3,10 @@ const rui = document.querySelectorAll(".rui");
 const scoreBoard = document.querySelector(".papan-skor");
 const koplo = document.querySelector("#tarik-sist");
 
-let selesai = true;
-let skor = 0;
+let finish = true;
+let score = 0;
+let gameCount = 0;
+let scoreboardArray = [];
 
 function randomTanah(jumpscareRui) {
   let spotKiri;
@@ -17,6 +19,7 @@ function randomTanah(jumpscareRui) {
   return indeksRandom;
 }
 
+// https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
 function randomWaktu(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
@@ -28,30 +31,34 @@ function ruiPop() {
 
   setTimeout(() => {
     tRandom.classList.remove("muncul");
-    if (!selesai) {
+    if (!finish) {
       ruiPop();
     }
   }, wRandom);
 }
 
 function mulai() {
-  selesai = false;
-  skor = 0;
+  finish = false;
+  score = 0;
   koplo.play();
-  alert("Bunuh semua Oni yang muncul dari asap biru dalam 10 detik");
-  scoreBoard.textContent = `Skor anda ${skor}`;
+  alert(
+    "Destroy all evil demons that appear from the blue smoke within 10 seconds"
+  );
+  scoreBoard.textContent = `Your score ${score}`;
   ruiPop();
   setTimeout(() => {
-    selesai = true;
-    alert(`Skor anda ${skor}`);
+    finish = true;
+    gameCount++;
+    scoreboardArray.push({ gameCount, score });
+    alert(`Your score ${score}`);
+    console.log(scoreboardArray);
   }, 10000);
 }
 
 function pukul() {
-  skor++;
+  score++;
   this.parentNode.classList.remove("muncul");
-  // scoreBoard.textContent = skor;
-  scoreBoard.textContent = `Skor anda ${skor}`;
+  scoreBoard.textContent = `Your score ${score}`;
 }
 
 rui.forEach((t) => {
