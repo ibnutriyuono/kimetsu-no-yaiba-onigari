@@ -2,11 +2,30 @@ const jumpscareRui = document.querySelectorAll(".rui-container");
 const rui = document.querySelectorAll(".rui");
 const scoreBoard = document.querySelector(".papan-skor");
 const koplo = document.querySelector("#tarik-sist");
+const highScoreButton = document.getElementById("highscore-button");
+const highScores = document.querySelector(".scoreboard-local-storage");
+const highscoresToggle = document.querySelector(".close-highscores");
 
 let finish = true;
 let score = 0;
 let gameCount = 0;
 let scoreboardArray = [];
+
+highScoreButton.addEventListener("click", () => {
+  highScores.classList.toggle("muncul");
+  for (let i = 0; i < scoreboardArray.length; i++) {
+    let elementP = document.createElement("p");
+    let scoreVal = document.createTextNode(scoreboardArray[i].score);
+    let gameCountVal = document.createTextNode(scoreboardArray[i].gameCount);
+    elementP.appendChild(gameCountVal);
+    elementP.appendChild(scoreVal);
+    highScores.appendChild(elementP);
+  }
+});
+
+highscoresToggle.addEventListener("click", () => {
+  highScores.classList.toggle("muncul");
+});
 
 function randomTanah(jumpscareRui) {
   let spotKiri;
@@ -47,11 +66,10 @@ function mulai() {
   scoreBoard.textContent = `Your score ${score}`;
   ruiPop();
   setTimeout(() => {
-    finish = true;
     gameCount++;
-    scoreboardArray.push({ gameCount, score });
+    finish = true;
     alert(`Your score ${score}`);
-    console.log(scoreboardArray);
+    tambahScore(gameCount, score);
   }, 10000);
 }
 
@@ -64,3 +82,7 @@ function pukul() {
 rui.forEach((t) => {
   t.addEventListener("click", pukul);
 });
+
+function tambahScore(gameCount, score) {
+  scoreboardArray.push({ gameCount, score });
+}
