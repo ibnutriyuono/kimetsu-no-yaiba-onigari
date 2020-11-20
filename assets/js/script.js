@@ -59,7 +59,7 @@ function ruiPop() {
 function mulai() {
   finish = false;
   score = 0;
-  // koplo.play();
+  koplo.play();
   alert(
     "Destroy all evil demons that appear from the blue smoke within 10 seconds"
   );
