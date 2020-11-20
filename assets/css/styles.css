@@ -135,9 +135,13 @@ button {
 }
 
 .score-board {
-  width: 600px;
   margin: auto;
   text-align: center;
+}
+
+.score-board #time-left,
+p {
+  color: var(--white);
 }
 
 .rui-container {
@@ -203,4 +207,34 @@ button {
   top: 20px;
   font-size: 20px;
   right: 20px;
+}
+
+.game-over-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  color: var(--white);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../images/bg_smoke_blue.png");
+  background-position: left;
+  background-color: rgba(9, 8, 10, 0.9);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  animation: movingSmoke 25s infinite;
+  visibility: hidden;
+}
+
+.game-over-container.muncul {
+  visibility: visible;
+}
+
+.game-over-container p {
+  color: var(--white);
+  cursor: pointer;
+  bottom: 0;
 }
