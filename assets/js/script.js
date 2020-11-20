@@ -15,6 +15,7 @@ let scoresFromLocal = localStorage.getItem("highestscore");
 let gameCountFromLocal = localStorage.getItem("gameCount");
 if (!gameCountFromLocal) {
   localStorage.setItem("gameCount", 0);
+  localStorage.setItem("highestscore", 0);
 } else {
   gameCount = gameCountFromLocal;
 }
