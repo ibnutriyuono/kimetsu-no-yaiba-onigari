@@ -5,6 +5,9 @@ const koplo = document.querySelector("#tarik-sist");
 const highScoreButton = document.getElementById("highscore-button");
 const highScores = document.querySelector(".scoreboard-local-storage");
 const highscoresToggle = document.querySelector(".close-highscores");
+const gameOver = document.querySelector(".game-over-container");
+const playAgainButton = document.getElementById("play-again");
+const time = document.getElementById("time-left");
 
 let finish = true;
 let score = 0;
@@ -13,6 +16,7 @@ let gameCount = 0;
 
 let scoresFromLocal = localStorage.getItem("highestscore");
 let gameCountFromLocal = localStorage.getItem("gameCount");
+
 if (!gameCountFromLocal) {
   localStorage.setItem("gameCount", 0);
   localStorage.setItem("highestscore", 0);
@@ -25,6 +29,11 @@ highScoreButton.addEventListener("click", () => {
 
 highscoresToggle.addEventListener("click", () => {
   highScores.classList.toggle("muncul");
+});
+
+playAgainButton.addEventListener("click", () => {
+  mulai();
+  gameOver.classList.toggle("muncul");
 });
 
 function randomTanah(jumpscareRui) {
@@ -65,10 +74,18 @@ function mulai() {
   );
   scoreBoard.textContent = `Your score ${score}`;
   ruiPop();
+  let timeLeft = time.innerHTML;
+  setInterval(function () {
+    if (timeLeft <= 0) clearInterval((timeLeft = 0));
+    time.innerHTML = ` ${timeLeft}`;
+    timeLeft--;
+  }, 1000);
+
   setTimeout(() => {
     gameCount++;
     finish = true;
-    alert(`Your score ${score}`);
+    gameOver.classList.toggle("muncul");
+    playAgainButton.innerHTML += ` Your score ${score}`;
     tambahScore(gameCount, score);
   }, 10000);
 }
