@@ -8,19 +8,18 @@ const highscoresToggle = document.querySelector(".close-highscores");
 
 let finish = true;
 let score = 0;
-let gameCount = 0;
 let scoreboardArray = [];
+let gameCount = 0;
 
+let scoresFromLocal = localStorage.getItem("highestscore");
+let gameCountFromLocal = localStorage.getItem("gameCount");
+if (!gameCountFromLocal) {
+  localStorage.setItem("gameCount", 0);
+} else {
+  gameCount = gameCountFromLocal;
+}
 highScoreButton.addEventListener("click", () => {
   highScores.classList.toggle("muncul");
-  for (let i = 0; i < scoreboardArray.length; i++) {
-    let elementP = document.createElement("p");
-    let scoreVal = document.createTextNode(scoreboardArray[i].score);
-    let gameCountVal = document.createTextNode(scoreboardArray[i].gameCount);
-    elementP.appendChild(gameCountVal);
-    elementP.appendChild(scoreVal);
-    highScores.appendChild(elementP);
-  }
 });
 
 highscoresToggle.addEventListener("click", () => {
@@ -59,7 +58,7 @@ function ruiPop() {
 function mulai() {
   finish = false;
   score = 0;
-  koplo.play();
+  // koplo.play();
   alert(
     "Destroy all evil demons that appear from the blue smoke within 10 seconds"
   );
@@ -85,4 +84,17 @@ rui.forEach((t) => {
 
 function tambahScore(gameCount, score) {
   scoreboardArray.push({ gameCount, score });
+  scoreboardArray.sort((a, b) => {
+    return b.score - a.score;
+  });
+  console.log(scoreboardArray[0]);
+  localStorage.setItem("highestscore", scoreboardArray[0].score);
+  localStorage.setItem("gameCount", scoreboardArray[0].gameCount);
 }
+
+let elementP = document.createElement("p");
+let gameCountVal = document.createTextNode(`Round : ${gameCountFromLocal}`);
+let scoreVal = document.createTextNode(` Score : ${scoresFromLocal}`);
+elementP.appendChild(gameCountVal);
+elementP.appendChild(scoreVal);
+highScores.appendChild(elementP);
